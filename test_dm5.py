@@ -1,3 +1,9 @@
+'''
+How to run the test
+install pytest
+make sure you have test_dm5.py and dm5.py in the same folder.
+python2 -m py.test test_dm5.py
+'''
 from dm5 import Package, Version
 
 my_package1 = Package("NPM", "express")
