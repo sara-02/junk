@@ -1,0 +1,10 @@
+import os
+
+POSTGRES_USER = os.environ.get("POSTGRES_USER", "")
+ecosystem = os.environ.get("ECOSYSTEM", "")
+POSTGRES_PW = os.environ.get("POSTGRES_PW", "")
+POSTGRES_DB = os.environ.get("POSTGRES_DB", "")
+POSTGRES_URL = os.environ.get("POSTGRES_URL", "")
+ACCESS_KEY = os.environ.get("ACCESS_KEY", "")
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
+AWS_BUCKET_NAME = os.environ.get("AWS_BUCKET_NAME", "")
