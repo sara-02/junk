@@ -83,14 +83,14 @@ with open("unique_keywords_index.json", "w") as f:
 
 print("Genearate the Package_Aggregated_Tags_Dict")
 # Genearate the Package_Aggregated_Tags_Dict
-rating_matrix_dict = dict()
+content_matrix_dict = dict()
 for package_name, current_tags in package_keywords_dict.items():
     for each_dep in package_dependencies_dict[package_name]:
         tags = package_keywords_dict.get(each_dep, [])
         current_tags.extend(tags)
     current_tags_index_wise = [map_keywords_dict[keyword]
                                for keyword in current_tags]
-    rating_matrix_dict[map_packages_dict[package_name]] = list(
+    content_matrix_dict[map_packages_dict[package_name]] = list(
         set(current_tags_index_wise))
 
 print("Delete apckage/dep/key dict")
@@ -102,7 +102,7 @@ print("Generate Sparse Matrix using the Package_Aggregated_Tags_Dict")
 
 sparse_mat = sp.dok_matrix(
     (len(map_packages_dict), len(map_keywords_dict)), dtype=np.int64)
-for package_id, tag_ids in rating_matrix_dict.items():
+for package_id, tag_ids in content_matrix_dict.items():
     sparse_mat[package_id, tag_ids] = 1
 
 print("Generate Sparse Coordinate matrix")
@@ -114,5 +114,5 @@ indices = np.mat([sparse_coo.row, sparse_coo.col]).transpose()
 
 print("Genearte the Sparse Tensor using Sparse Coo. Matrix")
 # Genearte the Sparse Tensor using Sparse Coo. Matrix
-rating_matrix = tf.SparseTensor(indices, sparse_coo.data, sparse_coo.shape)
-print("Size of content matrix = {}".format(rating_matrix.get_shape()))
+content_matrix = tf.SparseTensor(indices, sparse_coo.data, sparse_coo.shape)
+print("Size of content matrix = {}".format(content_matrix.get_shape()))
